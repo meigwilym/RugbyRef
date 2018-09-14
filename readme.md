@@ -4,6 +4,8 @@
 
 Keeps scores and times for rugby matches. 
 
+This is an experimental app built using Expo.io and React Native. 
+
 ## Version 0.1
 
 ### Home Screen
