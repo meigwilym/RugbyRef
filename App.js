@@ -1,26 +1,35 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, Button } from 'react-native';
-import Team from './components/Team';
+import { View, Button, Text } from 'react-native';
 import { Constants } from 'expo';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import scoreReducer from './scoreReducer';
+import Team from './components/Team';
+import Timer from './components/Timer';
+
+const store = createStore(scoreReducer);
 
 export default class App extends React.Component {
   render() {
     return (
+      <Provider store={ store }>
       <View style={{flex: 1, flexDirection: 'column', paddingTop: Constants.statusBarHeight}}>
-          <Team name="Home" />
-          <Team name="Away" />
-          <View>
-              <Button onPress={()=>console.log('end game')} title="Game Over" />
-          </View>
+        <Timer />
+        <Team whichTeam="home"/>
+        <Team whichTeam="away"/>
+        <View>
+            <Button onPress={()=>console.log('end game')} title="Game Over" />
+        </View>
       </View>
+  </Provider>
     );
   }
 }
 
-
 /**
 
 @todo
+        
 
 clock timer
 cards: red/yellow, player name/number

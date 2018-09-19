@@ -35,6 +35,8 @@ This is an experimental app built using Expo.io and React Native.
 
 * Localisation: English, Cymraeg, Francais, Italien https://medium.com/@jamuhl/translate-your-expo-io-react-native-mobile-application-aa220b2362d2
 * should gues language but also be configurable
+* **Modes** live and catchup modes (?) to log a finished game
+* connect to apple/android wear for time
 
 ### Screen Lock
 
@@ -47,6 +49,7 @@ This is an experimental app built using Expo.io and React Native.
 * insert touch judge names
 * leage/cup details
 * after entering team details, start game button or more details button for officials/league/cup details
+* start game button only goes to game screen, the clock is not started automatically 
 * all to be entered on the Game Over screen
 
 ### Timer
