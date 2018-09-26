@@ -3,7 +3,6 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../actions/timer';
-import { FIRST_HALF, SECOND_HALF } from '../../types/halves';
 
 /**
  * Turn seconds into MM:SS
@@ -17,21 +16,47 @@ function formatTime(time) {
     return `${minutes < 10 ? `0${minutes}` : minutes }:${seconds < 10 ? `0${seconds}` : seconds}`;
 }
 
+const buttonLabels = {
+    kickOff : 'Kick Off',
+    timeOff : 'Time Off',
+    timeOn : 'Time On',
+    halfTime : 'Half Time',
+    fullTime : 'Full Time'
+}
+
+const HALF_FIRST = 'first', 
+      HALF_SECOND = 'second';
+
 /**
  * Timer will run from 00:00 and continue until the ref stops the game
  * if it goes over the allocated time, the numbers will turn red
  */
 class Timer extends React.Component {
 
+
     constructor(props) {
         super(props);
         
         this.state = {
+            buttonLabel : 'mei',
             intervalId: null,
+            half: HALF_FIRST,
+            halfDuration: 2400,
             elapsedTime: 0,
-            hasKickedOff: false,
+            periodStart: false, 
+            periodEnd: false,
             isRunning: false,
-            isOvertime: false
+            isOverTime: false, 
+            timestamps : {
+                first: {
+                    start: null,
+                    end: null
+                },
+                second: {
+                    start: null,
+                    end: null
+                }
+            }
         };
 
         this.periodStart = this.periodStart.bind(this);
@@ -48,23 +73,26 @@ class Timer extends React.Component {
      */
 
     periodStart() {
-        this.props.startPeriod(); // dispatcher
-        this.setState(state => ({ hasKickedOff: true }));
+        console.log('period start')
+        this.setState(state => ({periodStart : true}));
         this.timerStart();
+        
     }
 
     timeOff() {
+        console.log('time off')
         this.timerStop();
     }
 
     timeOn() {
+        console.log('time on')
         this.timerStart();
     }
 
     periodEnd() {
-        this.props.endPeriod(); // dispatcher
+        console.log('period end')
         this.timerStop();
-        this.setState(state => ({ hasKickedOff: false , elapsedTime : 0, isOvertime : false}));
+        this.setState(state => ({periodEnd : true}));
     }
 
     timerStop() {
@@ -77,15 +105,9 @@ class Timer extends React.Component {
         this.setState(state => ({ isRunning : true, intervalId : intv }));
     }
 
+
     addSecond() {
-        this.setState(state => {
-            const newTime = state.elapsedTime + 1;
-            // const newTime = Date.now() - state[this.props.currentHalf].start; // how will this handle stopages?
-            return { 
-                elapsedTime : newTime, 
-                isOvertime : (newTime > this.props.halfDuration)
-            }
-        });
+        this.setState(state => ({ elapsedTime : state.elapsedTime + 1}) );
     }
 
     render(){
@@ -97,36 +119,28 @@ class Timer extends React.Component {
                     </View>
                     <View style={{flex:1}}>
                         {
-                            (this.state.hasKickedOff == false) ? 
+                            (this.state.periodStart == false) ? 
                             (<TouchableOpacity onPress={this.periodStart} style={styles.button}>
-                                <Text style={styles.buttonText}>
-                                {
-                                    (this.props.currentHalf == FIRST_HALF) ? 'Kick Off' : 'Second Half'
-                                }
-                                </Text>
+                                <Text style={styles.buttonText}>Kick Off</Text>
                             </TouchableOpacity>)
                             : null
                         }
                         {
-                            (this.state.hasKickedOff && this.state.isRunning && this.state.isOvertime) ? 
-                            (<TouchableOpacity onPress={this.periodEnd} style={[styles.button, {backgroundColor:'red'}]}>
-                                <Text style={styles.buttonText}>
-                                {
-                                    (this.props.currentHalf == FIRST_HALF) ? 'Half Time' : 'Full Time'
-                                }
-                                </Text>
+                            (this.state.periodStart && this.state.isRunning && this.state.isOvertime) ? 
+                            (<TouchableOpacity onPress={this.endPeriod} style={styles.button}>
+                                <Text style={styles.buttonText}>End Half</Text>
                             </TouchableOpacity>)
                             : null
                         }
                         {
-                            (this.state.hasKickedOff && this.state.isRunning && !this.state.isOvertime) ? 
+                            (this.state.periodStart && this.state.isRunning) ? 
                             (<TouchableOpacity onPress={this.timeOff} style={styles.button}>
                                 <Text style={styles.buttonText}>Time Off</Text>
                             </TouchableOpacity>)
                             : null
                         }
                         {
-                            (this.state.hasKickedOff && this.state.isRunning == false) ? 
+                            (this.state.periodStart && this.state.isRunning == false) ? 
                             (<TouchableOpacity onPress={this.timeOn} style={styles.button}>
                                 <Text style={styles.buttonText}>Time On</Text>
                             </TouchableOpacity>)
@@ -137,18 +151,21 @@ class Timer extends React.Component {
                 </View>
     }
 }
-
-const mapStateToProps = function(state){
+/*
+const mapStateToProps = function(state, ownProps){
     return state.timer;
 }
 
 const mapDispatchToProps = function(dispatch, ownProps) {
     return {
-        startPeriod : () => dispatch(actionCreators.timerStartPeriod(ownProps.currentHalf)),
-        endPeriod : () => dispatch(actionCreators.timerEndPeriod(ownProps.currentHalf))
+        startPeriod : (half = 'first') => dispatch(actionCreators.timerStartPeriod(half)),
+        addSecond : () => dispatch(actionCreators.timerAddSecond()),
+        timeOff : () => dispatch(actionCreators.timerTimeOff()),
+        timeOn : () => dispatch(actionCreators.timerTimeOn()),
+        endPeriod : (half) => dispatch(actionCreators.timerEndPeriod(half))
     }
 }
-
+*/
 
 const styles = StyleSheet.create({
     container : {
@@ -173,4 +190,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Timer);
+export default Timer;

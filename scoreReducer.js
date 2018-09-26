@@ -1,32 +1,5 @@
+import initialState from './initialState';
 import { SCORE_TRY, SCORE_CON, SCORE_PEN } from './types';
-
-const initialState = {    
-    teams: {
-        home: {
-            name: "Home",
-            scoring: {
-                tries: [],
-                cons: [],
-                pens: [],
-                calculated: 0
-            }
-        },
-        away: {
-            name: "Away",
-            scoring: {
-                tries: [],
-                cons: [],
-                pens: [],
-                calculated: 0
-            }
-        }
-    },
-    time: {
-        halfLength: 40,
-        start: null,
-    },
-    ui: {}
-}
 
 function applyScoreTry(state, action) {
     return {

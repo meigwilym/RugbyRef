@@ -29,6 +29,11 @@ This is an experimental app built using Expo.io and React Native.
 * Show game summary: scores & brakedowns
 * button to go back to Home Screen
 
+## Timer and Game Periods 
+
+The timer should be seperate from the game management, i.e. the ref can call full time at any point he likes. 
+so the timer should just run and act as advisor to the ref as to the game length. The ref is the ultimate judge. 
+
 ## Further Ideas
 
 * About page, links to app on both stores for sharing 

@@ -1,5 +1,8 @@
-export const initialState = {    
+import { FIRST_HALF } from './types/halves';
+
+export default initialState = {    
     teams: {
+        canScore: true,
         home: {
             name: "Home",
             scoring: {
@@ -19,10 +22,24 @@ export const initialState = {
             }
         }
     },
-    time: {
-        halfLength: 40,
-        start: null,
+    timer: {
+        currentHalf: FIRST_HALF,
+        halfDuration: 10,
+        first: {
+            start: null,
+            end: null
+        },
+        second: {
+            start: null,
+            end: null
+        }
     },
-    ui: {}
+    ui: {
+        WelcomeScreen : {},
+        GameCreateScreen : {},
+        PlayGameScreen : {},
+        GameOverScreen : {},
+        AboutScreen : {}
+    }
 }
 

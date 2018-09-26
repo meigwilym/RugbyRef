@@ -5,11 +5,13 @@ import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
  * Generic button
  */
 const Button = ({ onPress, color, title }) =>
+    <View  style={{flex: 1}}>
         <TouchableHighlight onPress={onPress} underlayColor="white">
             <View style={[styles.button, {backgroundColor: color}]}>
                 <Text style={styles.buttonText}>{title.toUpperCase()}</Text>
             </View>
         </TouchableHighlight>
+        </View>
      
 /**   
  * Try Button
@@ -23,6 +25,15 @@ const TryButton = props =>
 const PenButton = props => 
     <Button title="Pen" onPress={props.onPress} color="green" />
 
+/** 
+ * Conversion confirm buttons
+ */
+const ConButtons = ({onHit, onMiss}) => 
+    <View style={{flex: 2, flexDirection: 'row'}}>
+        <Button title="Con" onPress={onHit} color="green" />
+        <Button title="Miss" onPress={onMiss} color="red" />
+    </View>
+
 
 const styles = StyleSheet.create({
     button : {
@@ -35,4 +46,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export { TryButton, PenButton };
+export { TryButton, PenButton, ConButtons };

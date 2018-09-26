@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     scoreDetail : {
         flex: 1, 
         flexDirection: 'column', 
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
     },
     label : {
         fontSize: 10, 

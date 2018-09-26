@@ -16,12 +16,6 @@ function scoreCon(whichTeam){
     };
 }
 
-function missCon(){
-    return { 
-        type: 'MISS_CON'
-    };
-}
-
 function scorePen(whichTeam){
     return { 
         type: SCORE_PEN, 
@@ -33,7 +27,6 @@ function scorePen(whichTeam){
 const actionCreators = {
     scoreTry,
     scoreCon,
-    missCon,
     scorePen
 };
 
