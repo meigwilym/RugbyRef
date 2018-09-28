@@ -34,12 +34,9 @@ export default initialState = {
             end: null
         }
     },
-    ui: {
-        WelcomeScreen : {},
-        GameCreateScreen : {},
-        PlayGameScreen : {},
-        GameOverScreen : {},
-        AboutScreen : {}
+    officials: {
+        referee: "Referee",
+        touchJudges: []
     }
 }
 

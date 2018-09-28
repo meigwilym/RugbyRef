@@ -1,0 +1,4 @@
+const MATCH_SETUP = 'MATCH_SETUP';
+const MATCH_END = 'MATCH_END';
+
+export { MATCH_SETUP, MATCH_END };

@@ -4,43 +4,15 @@ import { Constants } from 'expo';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from './reducers';
-import initialState from './initialState';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import RootNav from './Navigation';
 
-import Home from './screens/Home';
-import About from './screens/About';
-import NewGame from './screens/NewGame';
-import Game from './screens/Game';
-import GameOver from './screens/GameOver';
-
-const store = createStore(rootReducer, initialState);
-
-const RootStack = createBottomTabNavigator({
-  Home: {
-    screen: Home,
-  },
-  About : {
-    screen: About 
-  }
-});
-
-const GameStack = createStackNavigator({
-  NewGame : {
-    screen: NewGame
-  },
-  Game : {
-    screen: Game
-  },
-  GameOver : {
-    screen : GameOver
-  }
-});
+const store = createStore(rootReducer);
 
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={ store }>
-        <RootStack />
+        <RootNav />
       </Provider>
     );
   }

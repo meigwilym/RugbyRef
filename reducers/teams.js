@@ -1,4 +1,5 @@
 import { SCORE_TRY, SCORE_CON, SCORE_PEN } from '../types';
+import { MATCH_SETUP } from '../types/match';
 
 function applyScoreTry(state, action) {
     return {
@@ -51,8 +52,24 @@ function applyScorePen(state, action) {
     }
 }
 
+function matchSetup(state, action){
+    return {
+        ...state,
+        home: {
+            ...state.home,
+            name: action.home
+        },
+        away: {
+            ...state.away,
+            name: action.away
+        }
+    };
+}
+
 const teams = (state, action) => {
     switch(action.type) {
+        case MATCH_SETUP:
+            return matchSetup(state, action)
         case SCORE_TRY:
             return applyScoreTry(state, action);
         case SCORE_CON: 

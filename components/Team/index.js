@@ -1,10 +1,9 @@
 // Team
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../actions';
 import { TryButton, PenButton, ScoreDetail, ConButtons } from '../TeamComponents';
-
 
 class Team extends React.Component {
     
@@ -38,10 +37,9 @@ class Team extends React.Component {
     render() { 
         const { name, scoring } = this.props;
         
-        return 
-            <View style={styles.container}>
+        return (<View style={styles.container}>
                 <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                    <Text style={{ fontSize: 50 }}>{name}</Text>
+                    <Text style={{ fontSize: 50 }} numberOfLines={1}>{name}</Text>
                     <Text style={{ fontSize: 50, textAlign:'right' }}>{scoring.calculated}</Text>
                 </View>                
                 <View style={{flexDirection:'row', justifyContent:'space-between'}}>
@@ -62,7 +60,7 @@ class Team extends React.Component {
                             </View>)
                     }                     
                 </View>
-            </View>
+            </View>);
     }
 }
 

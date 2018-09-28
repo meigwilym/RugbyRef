@@ -1,15 +1,11 @@
 import React from 'react';
 import { View, Text} from 'react-native';
-import { Constants } from 'expo';
+import appStyles from '../styles';
 
 export default class About extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        return (<View style={{flex: 1, flexDirection: 'column', paddingTop: Constants.statusBarHeight}}>
+        return (<View style={appStyles.page}>
                 <Text>About Screen</Text>
             </View>);
     }

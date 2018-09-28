@@ -1,4 +1,5 @@
 import { TIMER_KICK_OFF, TIMER_END } from '../types/timer';
+import { MATCH_SETUP } from '../types/match';
 
 /**
  * 
@@ -26,8 +27,17 @@ function timerEndPeriod(state, action) {
     }
 }
 
+function matchSetupTimer(state, action){
+    return {
+        ...state,
+        halfDuration: parseInt(action.duration)
+    }
+}
+
 const timer = (state, action) => {
     switch(action.type) {
+        case MATCH_SETUP:
+            return matchSetupTimer(state, action)
         case TIMER_KICK_OFF : 
             return timerStartPeriod(state, action);
         case TIMER_END:

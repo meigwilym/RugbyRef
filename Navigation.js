@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';
 
 import Home from './screens/Home';
 import About from './screens/About';
@@ -7,7 +7,7 @@ import NewGame from './screens/NewGame';
 import Game from './screens/Game';
 import GameOver from './screens/GameOver';
 
-export const RootStack = createBottomTabNavigator({
+export const HomeNav = createBottomTabNavigator({
   Home: {
     screen: Home,
   },
@@ -19,7 +19,7 @@ export const RootStack = createBottomTabNavigator({
   animationEnabled: true
 });
 
-export const GameNavigation = createStackNavigator({
+export const GameNav = createStackNavigator({
   NewGame : {
     screen: NewGame,
     navigationOptions: ({ navigation }) => ({
@@ -41,4 +41,12 @@ export const GameNavigation = createStackNavigator({
 },
 {
   initialRouteName: 'NewGame',
+});
+
+
+export default RootNav = createSwitchNavigator({
+  Home: HomeNav,
+  Game: GameNav
+},{
+  initialRouteName: 'Home' 
 });
