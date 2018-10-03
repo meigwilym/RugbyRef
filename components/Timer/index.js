@@ -20,6 +20,10 @@ function formatTime(time) {
 /**
  * Timer will run from 00:00 and continue until the ref stops the game
  * if it goes over the allocated time, the numbers will turn red
+ * 
+ * Timer works with timestamps in seconds. The tick is calculated by subtracting the start timestamp from the current. 
+ * 
+ * Stoppage time is stored and added onto the start timestamp. 
  */
 class Timer extends React.Component {
 
@@ -61,13 +65,11 @@ class Timer extends React.Component {
     timeOff() {
         this.setState(state => ({ stoppage:  { start : this.dateNow(), total: state.stoppage.total }}));
         this.timerStop();
-        console.log(this.state)
     }
 
     timeOn() {
         this.setState(state => ({ stoppage: {start : undefined, total: (state.stoppage.total + (this.dateNow() - state.stoppage.start)) } }));
         this.timerStart();
-        console.log(this.state)
     }
 
     periodEnd() {
