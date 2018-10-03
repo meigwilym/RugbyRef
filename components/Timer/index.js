@@ -31,7 +31,12 @@ class Timer extends React.Component {
             elapsedTime: 0,
             hasKickedOff: false,
             isRunning: false,
-            isOvertime: false
+            isOvertime: false,
+            startTime: undefined,
+            stoppage: {
+                start: undefined,
+                total: 0
+            }
         };
 
         this.periodStart = this.periodStart.bind(this);
@@ -49,16 +54,20 @@ class Timer extends React.Component {
 
     periodStart() {
         this.props.startPeriod(); // dispatcher
-        this.setState(state => ({ hasKickedOff: true }));
+        this.setState(state => ({ hasKickedOff: true, startTime : this.dateNow() }));
         this.timerStart();
     }
 
     timeOff() {
+        this.setState(state => ({ stoppage:  { start : this.dateNow(), total: state.stoppage.total }}));
         this.timerStop();
+        console.log(this.state)
     }
 
     timeOn() {
+        this.setState(state => ({ stoppage: {start : undefined, total: (state.stoppage.total + (this.dateNow() - state.stoppage.start)) } }));
         this.timerStart();
+        console.log(this.state)
     }
 
     periodEnd() {
@@ -79,13 +88,19 @@ class Timer extends React.Component {
 
     addSecond() {
         this.setState(state => {
-            const newTime = state.elapsedTime + 1;
-            // const newTime = Date.now() - state[this.props.currentHalf].start; // how will this handle stopages?
+            const newTime = this.dateNow() - (this.state.startTime + state.stoppage.total );
             return { 
                 elapsedTime : newTime, 
                 isOvertime : (newTime > this.props.halfDuration)
             }
         });
+    }
+
+    /**
+     * Provide the number of seconds since the epoch 
+     */
+    dateNow() {
+        return Math.floor(Date.now() / 1000);
     }
 
     render(){
@@ -141,6 +156,18 @@ class Timer extends React.Component {
 const mapStateToProps = function(state){
     return state.timer;
 }
+/** 
+currentHalf: FIRST_HALF,
+halfDuration: 10,
+first: {
+    start: null,
+    end: null
+},
+second: {
+    start: null,
+    end: null
+}
+ */
 
 const mapDispatchToProps = function(dispatch, ownProps) {
     return {
