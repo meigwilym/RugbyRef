@@ -3,7 +3,8 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../actions/teams';
-import { TryButton, PenButton, ScoreDetail, ConButtons } from '../TeamComponents';
+import { TryButton, PenButton, ConButtons } from './ActionButtons';
+import ScoreDetail from './ScoreDetail';
 
 class Team extends React.Component {
     
