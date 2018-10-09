@@ -36,6 +36,7 @@ export const GameNav = createStackNavigator({
     screen : GameOver,
     navigationOptions: ({ navigation }) => ({
       title: 'Game Over',
+      headerBackTitleVisible: false,
     }),
   }
 },

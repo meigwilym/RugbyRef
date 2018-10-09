@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../actions/timer';
 import { FIRST_HALF, SECOND_HALF } from '../../types/halves';
+import { withNavigation, NavigationActions } from 'react-navigation';
 
 /**
  * Turn seconds into MM:SS
@@ -50,32 +51,65 @@ class Timer extends React.Component {
         this.timerStop = this.timerStop.bind(this);
         this.timerStart = this.timerStart.bind(this);
         this.addSecond = this.addSecond.bind(this);
+
+        this.onDoublePress = this.onDoublePress.bind(this);
     }
+
+    lastPress = Date.now();
+
+    /**
+     * Timer start/stop button must be double tapped
+     */
+    onDoublePress = () => {
+        const time = new Date().getTime();
+        const delta = time - this.lastPress;
+        this.lastPress = time;
+        
+        const DOUBLE_PRESS_DELAY = 300;
+        return (delta < DOUBLE_PRESS_DELAY);
+    };
 
     /**
      * AKA Kick Off
      */
-
     periodStart() {
+        if(!this.onDoublePress()) return;
+
         this.props.startPeriod(); // dispatcher
         this.setState(state => ({ hasKickedOff: true, startTime : this.dateNow() }));
         this.timerStart();
     }
 
     timeOff() {
+        if(!this.onDoublePress()) return;
+
         this.setState(state => ({ stoppage:  { start : this.dateNow(), total: state.stoppage.total }}));
         this.timerStop();
     }
 
     timeOn() {
+        if(!this.onDoublePress()) return;
+
         this.setState(state => ({ stoppage: {start : undefined, total: (state.stoppage.total + (this.dateNow() - state.stoppage.start)) } }));
         this.timerStart();
     }
 
     periodEnd() {
+        if(!this.onDoublePress()) return;
+
         this.props.endPeriod(); // dispatcher
         this.timerStop();
         this.setState(state => ({ hasKickedOff: false , elapsedTime : 0, isOvertime : false}));
+
+        if(this.props.currentHalf == SECOND_HALF) {
+            const resetAction = NavigationActions.reset({
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({ routeName: 'GameOver' }),
+                ],
+            });
+            this.props.navigation.dispatch(resetAction);
+        }
     }
 
     timerStop() {
@@ -107,12 +141,12 @@ class Timer extends React.Component {
 
     render(){
         return <View style={styles.container}>
-                    <View style={{flex:4}}>
+                    <View style={{flex:3}}>
                         <Text style={[styles.time, (this.state.isOvertime ? styles.timeOver : null)]}>
                             {formatTime(this.state.elapsedTime)}
                         </Text> 
                     </View>
-                    <View style={{flex:1}}>
+                    <View style={{flex:2}}>
                         {
                             (this.state.hasKickedOff == false) ? 
                             (<TouchableOpacity onPress={this.periodStart} style={styles.button}>
@@ -158,18 +192,6 @@ class Timer extends React.Component {
 const mapStateToProps = function(state){
     return state.timer;
 }
-/** 
-currentHalf: FIRST_HALF,
-halfDuration: 10,
-first: {
-    start: null,
-    end: null
-},
-second: {
-    start: null,
-    end: null
-}
- */
 
 const mapDispatchToProps = function(dispatch, ownProps) {
     return {
@@ -202,4 +224,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Timer);
+export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(Timer));

@@ -2,7 +2,6 @@ import { FIRST_HALF } from './types/halves';
 
 export default initialState = {    
     teams: {
-        canScore: true,
         home: {
             name: "Home",
             scoring: {
@@ -10,7 +9,9 @@ export default initialState = {
                 cons: [],
                 pens: [],
                 calculated: 0
-            }
+            },
+            canScore: true,
+            canScoreCon: false,
         },
         away: {
             name: "Away",
@@ -19,7 +20,9 @@ export default initialState = {
                 cons: [],
                 pens: [],
                 calculated: 0
-            }
+            },
+            canScore: true,
+            canScoreCon: false,
         }
     },
     timer: {
@@ -34,6 +37,7 @@ export default initialState = {
             end: null
         }
     },
+    timeOn: false,
     officials: {
         referee: "Referee",
         touchJudges: []

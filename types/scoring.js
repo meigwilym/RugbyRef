@@ -1,5 +1,6 @@
 const SCORE_TRY = 'SCORE_TRY'; 
 const SCORE_CON = 'SCORE_CON';
+const MISS_CON = 'MISS_CON';
 const SCORE_PEN = 'SCORE_PEN';
 
-export { SCORE_TRY, SCORE_CON, SCORE_PEN }; 
+export { SCORE_TRY, SCORE_CON, MISS_CON, SCORE_PEN }; 

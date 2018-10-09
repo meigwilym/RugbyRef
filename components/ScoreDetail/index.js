@@ -10,16 +10,14 @@ const ScoreDetail = props =>
 const styles = StyleSheet.create({
     scoreDetail : {
         flex: 1, 
-        flexDirection: 'column', 
-        justifyContent: 'flex-start'
+        flexDirection: 'row', 
     },
     label : {
-        fontSize: 10, 
-        textAlign: 'center'
+        fontSize: 20, 
+        paddingRight:5
     },
     amount : {
         fontSize: 20, 
-        textAlign: 'center'
     }
 });
     

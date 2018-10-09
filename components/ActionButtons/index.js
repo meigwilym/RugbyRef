@@ -4,7 +4,7 @@ import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 /**
  * Generic button
  */
-const Button = ({ onPress, color, title }) =>
+const Button = ({ onPress, color, title, disabled }) =>
     <View  style={{flex: 1}}>
         <TouchableHighlight onPress={onPress} underlayColor="white">
             <View style={[styles.button, {backgroundColor: color}]}>
@@ -17,13 +17,13 @@ const Button = ({ onPress, color, title }) =>
  * Try Button
  */
 const TryButton = props => 
-    <Button title="Try" onPress={props.onPress}  color="blue"/>
+    <Button title="Try" onPress={props.onPress} disabled={props.disabled} color="blue"/>
         
 /**
  * Penalty Button
  */
 const PenButton = props => 
-    <Button title="Pen" onPress={props.onPress} color="green" />
+    <Button title="Pen" onPress={props.onPress} disabled={props.disabled} color="green" />
 
 /** 
  * Conversion confirm buttons
