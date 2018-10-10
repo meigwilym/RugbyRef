@@ -10,9 +10,9 @@ class Game extends React.Component {
     render() {
         return (
             <View style={{flex: 1, flexDirection: 'column', paddingTop: Constants.statusBarHeight}}>
-                <Timer currentHalf={this.props.timer.currentHalf} />
                 <Team whichTeam="home" />
                 <Team whichTeam="away" />
+                <Timer currentHalf={this.props.timer.currentHalf} />
             </View>
         );
     }

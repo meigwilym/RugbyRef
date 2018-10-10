@@ -10,7 +10,7 @@ export default initialState = {
                 pens: [],
                 calculated: 0
             },
-            canScore: true,
+            canScore: false,
             canScoreCon: false,
         },
         away: {
@@ -21,7 +21,7 @@ export default initialState = {
                 pens: [],
                 calculated: 0
             },
-            canScore: true,
+            canScore: false,
             canScoreCon: false,
         }
     },
@@ -36,11 +36,6 @@ export default initialState = {
             start: null,
             end: null
         }
-    },
-    timeOn: false,
-    officials: {
-        referee: "Referee",
-        touchJudges: []
     }
 }
 

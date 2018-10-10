@@ -42,7 +42,6 @@ class Team extends React.Component {
     render() { 
         const { name, scoring, canScore, canScoreCon  } = this.props[this.props.whichTeam];
 
-
         return (<View style={styles.container}>
                 <View style={{flexDirection:'row', justifyContent:'space-between'}}>
                     <Text style={{ fontSize: 50 }} numberOfLines={1}>{name}</Text>

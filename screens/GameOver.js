@@ -1,16 +1,17 @@
-import React from 'react';
-import { View, Text} from 'react-native';
+import React from 'react'; 
 import { Constants } from 'expo';
+import { View, Button } from 'react-native'; 
+import FinalScore from '../components/FinalScore'; 
 
 export default class GameOver extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (<View style={{flex: 1, flexDirection: 'column', paddingTop: Constants.statusBarHeight}}>
-                <Text>Game Over Screen</Text>
+                <FinalScore whichTeam="home"  />
+                <FinalScore whichTeam="away" />
+                <Button onPress={() => this.props.navigation.navigate('Home')} 
+                    title="Finish" 
+                    accessibilityLabel="Finish this game and back to the start" />
             </View>);
     }
 }

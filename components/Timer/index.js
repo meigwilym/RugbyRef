@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../actions/timer';
 import { FIRST_HALF, SECOND_HALF } from '../../types/halves';
-import { withNavigation, NavigationActions } from 'react-navigation';
+import { withNavigation, StackActions, NavigationActions } from 'react-navigation';
 
 /**
  * Turn seconds into MM:SS
@@ -73,8 +73,6 @@ class Timer extends React.Component {
      * AKA Kick Off
      */
     periodStart() {
-        if(!this.onDoublePress()) return;
-
         this.props.startPeriod(); // dispatcher
         this.setState(state => ({ hasKickedOff: true, startTime : this.dateNow() }));
         this.timerStart();
@@ -95,15 +93,14 @@ class Timer extends React.Component {
     }
 
     periodEnd() {
-        if(!this.onDoublePress()) return;
-
         this.props.endPeriod(); // dispatcher
         this.timerStop();
         this.setState(state => ({ hasKickedOff: false , elapsedTime : 0, isOvertime : false}));
 
         if(this.props.currentHalf == SECOND_HALF) {
-            const resetAction = NavigationActions.reset({
+            const resetAction = StackActions.reset({
                 index: 0,
+                key: null,
                 actions: [
                     NavigationActions.navigate({ routeName: 'GameOver' }),
                 ],

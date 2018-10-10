@@ -92,9 +92,11 @@ function timerKickOff(state, action) {
     return {
         ...state,
         home: {
+            ...state.home,
             canScore: true
         },
         away : {
+            ...state.away,
             canScore: true
         }
     }
@@ -104,9 +106,11 @@ function timerEnd(state, action) {
     return {
         ...state,
         home: {
+            ...state.home,
             canScore: false
         },
         away : {
+            ...state.away,
             canScore: false
         }
     }
@@ -124,6 +128,10 @@ const teams = (state, action) => {
             return applyMissCon(state, action);
         case SCORE_PEN: 
             return applyScorePen(state, action);
+        case TIMER_KICK_OFF:
+            return timerKickOff(state, action);
+        case TIMER_END:
+            return timerEnd(state, action);
         default:
             return state;
     }
