@@ -26,20 +26,20 @@ This is an experimental app built using Expo.io and React Native.
 
 ### Game Over
 
-* Show game summary: scores & brakedowns
+* Show game summary: scores & breakdowns
 * button to go back to Home Screen
 
 ## Timer and Game Periods 
 
 The timer should be seperate from the game management, i.e. the ref can call full time at any point he likes. 
-so the timer should just run and act as advisor to the ref as to the game length. The ref is the ultimate judge. 
+
+So the timer should just run and act as advisor to the ref as to the game length. The ref is the ultimate judge. 
 
 ## Further Ideas
 
 * About page, links to app on both stores for sharing 
-
 * Localisation: English, Cymraeg, Francais, Italien https://medium.com/@jamuhl/translate-your-expo-io-react-native-mobile-application-aa220b2362d2
-* should gues language but also be configurable
+* should guess the language but also be configurable
 * **Modes** live and catchup modes (?) to log a finished game
 * connect to apple/android wear for time
 

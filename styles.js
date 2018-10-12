@@ -7,7 +7,12 @@ export default appStyles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       paddingTop: Constants.statusBarHeight,
-      backgroundColor: '#ecf0f1',
+      backgroundColor: 'transparent',
     },
+    foreText: {
+      color:'white',
+      fontSize:15,
+      fontWeight:'bold',
+    }
   });
   

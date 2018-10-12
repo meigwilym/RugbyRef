@@ -1,6 +1,7 @@
 import { SCORE_TRY, SCORE_CON, MISS_CON, SCORE_PEN } from '../types/scoring';
-import { MATCH_SETUP } from '../types/match';
+import { MATCH_SETUP, MATCH_END } from '../types/match';
 import { TIMER_KICK_OFF, TIMER_END } from '../types/timer';
+import initialState from '../initialState';
 
 function applyScoreTry(state, action) {
     return {
@@ -116,6 +117,13 @@ function timerEnd(state, action) {
     }
 }
 
+function gameOver(state) {
+    return {
+        ...state,
+        teams: initialState.teams
+    };
+}
+
 const teams = (state, action) => {
     switch(action.type) {
         case MATCH_SETUP:
@@ -132,6 +140,8 @@ const teams = (state, action) => {
             return timerKickOff(state, action);
         case TIMER_END:
             return timerEnd(state, action);
+        case MATCH_END:
+            return gameOver(state);
         default:
             return state;
     }

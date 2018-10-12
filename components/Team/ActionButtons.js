@@ -38,7 +38,7 @@ const ConButtons = ({onHit, onMiss}) =>
 const styles = StyleSheet.create({
     button : {
         alignItems: 'center',
-        padding: 20
+        padding: 10
     },
     buttonText: {
         color: 'white',

@@ -12,6 +12,7 @@ export default initialState = {
             },
             canScore: false,
             canScoreCon: false,
+            colour: '#ff0000',
         },
         away: {
             name: "Away",
@@ -23,6 +24,7 @@ export default initialState = {
             },
             canScore: false,
             canScoreCon: false,
+            colour: '#0000FF',
         }
     },
     timer: {

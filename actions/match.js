@@ -9,10 +9,9 @@ function matchSetup({ home, away, duration }) {
     };
 }
 
-function matchEnd(teams) {
+function matchEnd() {
     return {
-        type: MATCH_END,
-        teams
+        type: MATCH_END
     }
 }
 

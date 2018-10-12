@@ -1,5 +1,5 @@
 import { TIMER_KICK_OFF, TIMER_END } from '../types/timer';
-import { MATCH_SETUP } from '../types/match';
+import { MATCH_SETUP, MATCH_END } from '../types/match';
 
 /**
  * 
@@ -34,6 +34,13 @@ function matchSetupTimer(state, action){
     }
 }
 
+function gameOver(state) {
+    return {
+        ...state,
+        timer: initialState.timer
+    };
+}
+
 const timer = (state, action) => {
     switch(action.type) {
         case MATCH_SETUP:
@@ -42,6 +49,8 @@ const timer = (state, action) => {
             return timerStartPeriod(state, action);
         case TIMER_END:
             return timerEndPeriod(state, action);
+        case MATCH_END:
+            return gameOver(state);
         default:
             return state;
     }

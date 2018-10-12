@@ -1,6 +1,4 @@
 import React from 'react';
-import { View, Button, Text } from 'react-native';
-import { Constants } from 'expo';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from './reducers';

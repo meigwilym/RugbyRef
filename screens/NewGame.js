@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Button} from 'react-native';
+import { View, StyleSheet, Button, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import t from 'tcomb-form-native';
 import { actionCreators } from '../actions/match';
 import appStyles from '../styles';
+import { Card } from 'react-native-elements';
 
 const Form = t.form.Form;
 
@@ -50,6 +51,8 @@ class NewGame extends React.Component {
 
     render() {
         return (
+            <ImageBackground source={require('../assets/bg.png')} style={{width: '100%', height: '100%'}}>
+            <Card>
             <View style={styles.container}>
                 <Form ref={c => this._form = c} type={Match} options={options} value={{duration: 10}} />
                 <Button
@@ -57,7 +60,9 @@ class NewGame extends React.Component {
                     onPress={this.handleSubmit}
                     style={{padding:15, backgroundColor:'green'}}                    
                     />
-            </View>);
+            </View>
+            </Card>
+            </ImageBackground>);
     }
 }
 
